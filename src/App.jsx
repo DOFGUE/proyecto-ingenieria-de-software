@@ -1,9 +1,11 @@
-import { useState } from 'react'
+import Navbar from './components/navbar.jsx'
 
 function App() {
 
   return (
-    <h1>hola</h1>
+    <div>
+      <Navbar />
+    </div>
   )
 }
 
