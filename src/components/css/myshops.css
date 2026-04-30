@@ -1,0 +1,295 @@
+.myshops-container {
+  min-height: calc(100vh - 180px);
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+}
+
+.myshops-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.myshops-logo {
+  display: inline-block;
+  font-size: 28px;
+  font-weight: 800;
+  color: #323130;
+  text-decoration: none;
+  margin-bottom: 16px;
+  letter-spacing: 2px;
+}
+
+.myshops-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #323130;
+  margin: 0 0 8px 0;
+}
+
+.myshops-subtitle {
+  font-size: 14px;
+  color: #605e5c;
+  margin: 0;
+}
+
+.myshops-list {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.myshops-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  padding: 24px;
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.myshops-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #edebe9;
+}
+
+.myshops-card-id {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.myshops-label {
+  font-size: 12px;
+  color: #605e5c;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.myshops-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: #323130;
+}
+
+.myshops-estado {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.myshops-estado .ms-Icon {
+  font-size: 14px;
+}
+
+.estado-entregado {
+  background: #dff6dd;
+  color: #107c10;
+}
+
+.estado-proceso {
+  background: #fff4ce;
+  color: #797673;
+}
+
+.estado-pendiente {
+  background: #feecde;
+  color: #d83b01;
+}
+
+.myshops-card-body {
+  margin-bottom: 16px;
+}
+
+.myshops-fecha {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #605e5c;
+  margin-bottom: 16px;
+}
+
+.myshops-fecha .ms-Icon {
+  font-size: 16px;
+  color: #0078d4;
+}
+
+.myshops-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.myshops-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: #faf9f8;
+  border-radius: 8px;
+}
+
+.myshops-item-cantidad {
+  font-size: 13px;
+  font-weight: 600;
+  color: #0078d4;
+  min-width: 32px;
+}
+
+.myshops-item-nombre {
+  flex: 1;
+  font-size: 14px;
+  color: #323130;
+}
+
+.myshops-item-precio {
+  font-size: 14px;
+  font-weight: 500;
+  color: #323130;
+}
+
+.myshops-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 1px solid #edebe9;
+}
+
+.myshops-total {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.myshops-total-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: #323130;
+}
+
+.myshops-details-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  background: transparent;
+  border: 1px solid #0078d4;
+  border-radius: 8px;
+  color: #0078d4;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.myshops-details-btn:hover {
+  background: #0078d4;
+  color: white;
+}
+
+.myshops-details-btn .ms-Icon {
+  font-size: 12px;
+}
+
+.myshops-error {
+  text-align: center;
+  padding: 60px 20px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.myshops-error .ms-Icon {
+  font-size: 48px;
+  color: #d13438;
+  margin-bottom: 16px;
+}
+
+.myshops-error h2 {
+  font-size: 20px;
+  color: #323130;
+  margin: 0 0 12px 0;
+}
+
+.myshops-error p {
+  font-size: 14px;
+  color: #605e5c;
+  margin: 0 0 24px 0;
+}
+
+.myshops-login-btn {
+  padding: 12px 24px;
+  background: #0078d4;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.myshops-login-btn:hover {
+  background: #106ebe;
+}
+
+.myshops-back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #605e5c;
+  text-decoration: none;
+  font-size: 14px;
+  margin-top: 32px;
+}
+
+.myshops-back:hover {
+  color: #323130;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .myshops-card {
+    padding: 20px 16px;
+  }
+
+  .myshops-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .myshops-card-footer {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  .myshops-details-btn {
+    justify-content: center;
+  }
+}

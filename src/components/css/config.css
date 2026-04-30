@@ -1,0 +1,154 @@
+.config-container {
+  min-height: calc(100vh - 180px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+}
+
+.config-card {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  padding: 48px;
+  width: 100%;
+  max-width: 520px;
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.config-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.config-logo {
+  display: inline-block;
+  font-size: 28px;
+  font-weight: 800;
+  color: #323130;
+  text-decoration: none;
+  margin-bottom: 24px;
+  letter-spacing: 2px;
+}
+
+.config-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #323130;
+  margin: 0 0 8px 0;
+}
+
+.config-subtitle {
+  font-size: 14px;
+  color: #605e5c;
+  margin: 0;
+}
+
+.config-section {
+  margin-bottom: 28px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid #edebe9;
+}
+
+.config-section:last-of-type {
+  border-bottom: none;
+  margin-bottom: 20px;
+}
+
+.config-section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #323130;
+  margin: 0 0 20px 0;
+}
+
+.config-section-title .ms-Icon {
+  font-size: 20px;
+  color: #0078d4;
+}
+
+.config-field {
+  margin-bottom: 4px;
+}
+
+.config-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #323130;
+  margin-bottom: 8px;
+}
+
+.config-save-button {
+  background: #0078d4 !important;
+  border-radius: 8px !important;
+  margin-top: 8px;
+}
+
+.config-save-button:hover {
+  background: #106ebe !important;
+}
+
+.config-option-button {
+  border-radius: 8px !important;
+  justify-content: flex-start !important;
+}
+
+.config-option-button:hover {
+  background: #f5f5f5 !important;
+}
+
+.config-logout-section {
+  padding-bottom: 0;
+}
+
+.config-logout-button {
+  border-radius: 8px !important;
+  background: #d13438 !important;
+  color: white !important;
+}
+
+.config-logout-button:hover {
+  background: #a80000 !important;
+}
+
+.config-back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #605e5c;
+  text-decoration: none;
+  font-size: 14px;
+  margin-top: 24px;
+}
+
+.config-back:hover {
+  color: #323130;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .config-card {
+    padding: 32px 24px;
+  }
+
+  .config-title {
+    font-size: 20px;
+  }
+}
