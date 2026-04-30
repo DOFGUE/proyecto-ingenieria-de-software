@@ -1,0 +1,238 @@
+@font-face {
+  font-family: 'Changa One';
+  src: url('./fonts/ChangaOne-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Bebas';
+  src: url('./fonts/Bebas-Regular.ttf') format('truetype');
+}
+
+.cart-panel {
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* =========================
+   🧱 PANEL BASE
+========================= */
+.ms-Panel-main {
+  background: #e1dfc0 !important;
+  box-shadow: 6px 0 24px rgba(0, 0, 0, 0.12);
+  border: none !important;
+  border-radius: 12px 0 0 12px; /* 👈 bordes suaves */
+  overflow: hidden; /* 👈 evita fugas visuales */
+}
+
+/* 🔥 quitar espacios internos que generan la línea */
+.ms-Panel-contentInner {
+  background: transparent !important;
+  padding: 10px !important; /* 👈 clave */
+}
+
+.ms-Panel-content {
+  background: transparent !important;
+  padding: 15px !important; /* controlas tú el espacio */
+}
+
+/* overlay */
+.ms-Overlay {
+  background: rgba(0, 0, 0, 0.35) !important;
+  backdrop-filter: blur(3px);
+}
+
+/* =========================
+   🟡 HEADER
+========================= */
+.ms-Panel-header {
+  margin: 0 !important;
+  padding: 10px !important;
+}
+
+.ms-Panel-contentInner {
+  padding: 0 !important;
+}
+
+.ms-Panel-headerContent {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.ms-Panel-navigation {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* contenido header */
+.ms-Panel-headerContent {
+  background: transparent !important;
+}
+
+/* zona botón cerrar */
+.ms-Panel-navigation {
+  background: transparent !important;
+}
+
+/* título */
+.ms-Panel-headerText {
+  font-family: 'Changa One' !important;
+  font-size: 26px !important;
+  letter-spacing: 1px;
+  color: #b8513f !important;
+}
+
+/* botón cerrar */
+.ms-Panel-closeButton {
+  color: #111 !important;
+  transition: all 0.2s ease;
+}
+
+.ms-Panel-closeButton:hover {
+  color: #b8513f !important;
+  transform: rotate(90deg);
+}
+
+/* =========================
+   🛒 ITEMS
+========================= */
+.cart-item {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(0,0,0,0.05);
+  transition: all 0.25s ease;
+}
+
+.cart-item:hover {
+  background: rgba(184, 81, 63, 0.08);
+  transform: translateY(-3px);
+}
+
+.cart-img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.cart-info h4 {
+  margin: 0 0 4px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #111;
+}
+
+.cart-price {
+  margin: 0 0 8px 0;
+  color: #555;
+  font-size: 12px;
+}
+
+/* =========================
+   ➕ CONTROLES
+========================= */
+.cart-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cart-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.cart-btn.minus {
+  background: rgba(0,0,0,0.08);
+  color: #111;
+}
+
+.cart-btn.minus:hover {
+  background: rgba(0,0,0,0.2);
+}
+
+.cart-btn.plus {
+  background: #b8513f;
+  color: #fff;
+}
+
+.cart-btn.plus:hover {
+  background: #9e4435;
+  transform: scale(1.05);
+}
+
+.cart-qty {
+  width: 30px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.cart-remove {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: #b8513f;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.2s ease;
+}
+
+.cart-remove:hover {
+  text-decoration: underline;
+  color: #9e4435;
+}
+
+/* =========================
+   💰 TOTAL
+========================= */
+.cart-total {
+  border-top: 1px solid rgba(0,0,0,0.2);
+  padding-top: 16px;
+}
+
+.cart-total-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #111;
+}
+
+/* =========================
+   🔘 BOTONES
+========================= */
+.cart-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cart-primary {
+  background: #b8513f !important;
+  border-radius: 12px !important;
+  height: 46px;
+  font-weight: 600;
+}
+
+.cart-primary:hover {
+  background: #9e4435 !important;
+}
+
+.cart-secondary {
+  border-radius: 12px !important;
+  height: 46px;
+}
+
+/* =========================
+   ✨ DETALLE EXTRA
+========================= */
+.cart-item:hover .cart-info h4 {
+  color: #b8513f;
+}

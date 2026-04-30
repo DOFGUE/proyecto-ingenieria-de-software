@@ -1,18 +1,12 @@
-.container {
-    background-color: black;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
 .footer {
-    background-color: #1a1a1a;
-    color: #fff;
-    padding: 40px 20px;
+    background: #d0cc5b; /* mismo color navbar */
+    backdrop-filter: blur(8px);
+    color: #111;
+    padding: 50px 24px;
     margin-top: auto;
-    border-top: 2px solid #333;
 }
 
+/* CONTENIDO */
 .footer-content {
     max-width: 1200px;
     margin: 0 auto;
@@ -21,26 +15,31 @@
     gap: 30px;
 }
 
+/* TÍTULOS */
 .footer-section h4 {
-    font-size: 18px;
+    font-family: 'Changa One';
+    font-size: 20px;
     margin-bottom: 15px;
-    color: #fff;
-    font-weight: bold;
+    color: #b8513f;
+    letter-spacing: 1px;
 }
 
+/* TEXTO Y LINKS */
 .footer-section p,
 .footer-section a {
     font-size: 14px;
-    color: #ccc;
+    color: #111;
     line-height: 1.8;
     text-decoration: none;
+    opacity: 0.8;
 }
 
 .footer-section a:hover {
-    color: #fff;
-    text-decoration: underline;
+    color: #b8513f;
+    opacity: 1;
 }
 
+/* LISTAS */
 .footer-section ul {
     list-style: none;
     padding: 0;
@@ -50,28 +49,10 @@
     margin-bottom: 8px;
 }
 
-.footer-social .social-links {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.footer-social .social-logo {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background: #ffffff;
-    color: #111111;
-    font-weight: 700;
-    font-size: 14px;
-}
-
+/* REDES */
 .social-links {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
     gap: 10px;
 }
 
@@ -81,38 +62,65 @@
     gap: 10px;
     padding: 10px 14px;
     border-radius: 12px;
-    background: rgba(255, 255, 255, 0.05);
-    color: #ffffff;
-    transition: background 0.2s ease, transform 0.2s ease;
+    background: rgba(0, 0, 0, 0.05);
+    color: #111;
+    transition: all 0.2s ease;
 }
 
 .social-links a:hover {
-    background: rgba(255, 255, 255, 0.15);
-    transform: translateY(-1px);
+    background: rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+    color: #b8513f;
 }
 
+/* ICONOS BONITOS */
 .social-links a svg {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
+    fill: currentColor;
+    stroke: currentColor;
+
+    background: #111;
+    color: #d0cc5b;
+    padding: 6px;
+    border-radius: 50%;
+
+    transition: all 0.2s ease;
 }
 
-.social-facebook:hover {
-    background: rgba(59, 89, 152, 0.2);
+/* HOVER ICONO */
+.social-links a:hover svg {
+    background: #b8513f;
+    color: #fff;
+    transform: scale(1.1);
 }
 
-.social-instagram:hover {
-    background: linear-gradient(45deg, rgba(252, 176, 64, 0.2), rgba(219, 39, 119, 0.2));
+/* OPCIONAL: colores por red */
+.social-facebook:hover svg {
+    background: #3b5998;
 }
 
-.social-tiktok:hover {
-    background: rgba(25, 25, 25, 0.3);
+.social-instagram:hover svg {
+    background: linear-gradient(45deg, #fcb045, #db2777);
 }
 
+.social-tiktok:hover svg {
+    background: #000;
+}
+
+/* ICONO RED (si lo usas aparte) */
+.footer-social .social-logo {
+    background: #111;
+    color: #d0cc5b;
+}
+
+/* FOOTER BOTTOM */
 .footer-bottom {
     text-align: center;
     margin-top: 30px;
     padding-top: 20px;
-    border-top: 1px solid #333;
-    color: #999;
+    border-top: 1px solid rgba(0,0,0,0.2);
+    color: #111;
     font-size: 12px;
+    opacity: 0.7;
 }

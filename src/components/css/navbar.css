@@ -89,8 +89,8 @@
 
 /* TOPBAR MEJORADO */
 .navbar-topbar {
-  background: rgba(0, 0, 0, 0.85);
-  color: #f5f5f5;
+  background: rgba(255, 255, 255, 0.85);
+  color: #b8513f;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -105,13 +105,13 @@
 
 .navbar-topbar-link {
   text-decoration: none;
-  color: #f5f5f5;
+  color: #b8513f;
   font-weight: 500;
   transition: all 0.2s ease;
 }
 
 .navbar-topbar-link:hover {
-  color: #b8513f; /* tu color de marca */
+  color: #000000; /* tu color de marca */
 }
 
 /* MAINBAR */
@@ -146,60 +146,100 @@
    📂 SIDEBAR (MENÚ)
 ========================= */
 
-/* overlay oscuro */
+/* Overlay */
 .menu-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.4);
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(3px);
   z-index: 998;
+  animation: fadeOverlay 0.25s ease;
 }
 
-/* contenedor menú */
+/* Contenedor */
 .side-menu {
   position: fixed;
   top: 0;
-  left: -260px;
-  width: 260px;
+  left: -280px;
+  width: 280px;
   height: 100%;
-  background: #fff;
+  background: #e1dfc0;
   z-index: 999;
-  transition: left 0.3s ease;
   display: flex;
   flex-direction: column;
+  box-shadow: 6px 0 24px rgba(0, 0, 0, 0.12);
+  transition: left 0.3s ease;
 }
 
 .side-menu.open {
   left: 0;
 }
 
-/* header */
+/* Header */
 .side-menu-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px;
-  font-weight: bold;
-  border-bottom: 1px solid #eee;
+  padding: 20px 22px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  background: #ffffff;
 }
 
-/* contenido */
+.side-menu-header span {
+  font-family: 'changa one';
+  font-size: 24px;
+  letter-spacing: 1px;
+  color: #b8513f
+;
+}
+
+/* Icono cerrar */
+.side-menu-header .ms-Icon {
+  cursor: pointer;
+  font-size: 18px;
+  color: #111;
+  transition: all 0.2s ease;
+}
+
+.side-menu-header .ms-Icon:hover {
+  color: #b8513f !important;
+  transform: rotate(90deg);
+}
+
+/* Contenido */
 .side-menu-content {
   display: flex;
   flex-direction: column;
+  padding: 12px 0;
 }
 
+/* Links */
 .side-menu-link {
-  padding: 14px 20px;
+  padding: 15px 24px;
   text-decoration: none;
-  color: #111;
-  border-bottom: 1px solid #f2f2f2;
+  color: #333;
+  font-size: 16px;
+  font-weight: 500;
+  border-left: 4px solid transparent;
+  transition: all 0.25s ease;
 }
 
+/* Hover */
 .side-menu-link:hover {
-  background: #f5f5f5;
+  background: rgba(184, 81, 63, 0.08);
+  color: #b8513f;
+  border-left: 4px solid #b8513f;
+  padding-left: 30px;
+}
+
+/* Animación overlay */
+@keyframes fadeOverlay {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* =========================
