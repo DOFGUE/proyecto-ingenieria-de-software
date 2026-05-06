@@ -7,6 +7,7 @@ import hogar from './image/hogar.jpg'
 import oficina from './image/oficina.jpg'
 import './css/body.css'
 import products from '../data/products'
+import { WeatherRecommendations } from './WeatherRecommendations'
 
 initializeIcons()
 
@@ -196,7 +197,7 @@ export const Body = () => {
             <Icon iconName="ChevronRight" />
           </button>
       </div>
-
+      <WeatherRecommendations />
       {/* BOTÓN PARA MOSTRAR PRODUCTOS */}
       <div className="containerCards">
         <div className="top">

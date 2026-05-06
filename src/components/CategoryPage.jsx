@@ -1,6 +1,6 @@
 import React, { useRef, useCallback, useMemo, useContext } from 'react'
 import { FocusZone, List, mergeStyleSets, useTheme, ThemeProvider, initializeIcons } from '@fluentui/react'
-import { Link } from 'react-router-dom'
+import { Link, useParams, useSearchParams } from 'react-router-dom'
 import { CartContext } from '../context/CartContext'
 import products from '../data/products'
 import './css/body.css'
@@ -23,18 +23,6 @@ const generateStyles = (theme) => {
       boxSizing: 'border-box',
       margin: 8,
       background: palette.neutralLighter,
-      selectors: {
-        'focus:after': {
-          content: "''",
-          position: 'absolute',
-          left: 2,
-          right: 2,
-          top: 2,
-          bottom: 2,
-          boxSizing: 'border-box',
-          border: `1px solid ${palette.white}`,
-        },
-      },
     },
     listGridExampleSizer: {
       paddingBottom: '100%',
@@ -86,8 +74,86 @@ const generateStyles = (theme) => {
   })
 }
 
-const CategoryHogar = () => {
-  const productosCat = products.filter(p => p.categoria === 'Hogar')
+// Mapeo de categorías a emojis
+const categoryEmojis = {
+  limpieza: '🧹',
+  papeleria: '📝',
+  hogar: '🏠',
+  jugueteria: '🧩',
+  piñateria: '🎉',
+  maquillaje: '💄',
+  herramientas: '🔧',
+  ferreteria: '🪛',
+  clima: '🌤️',
+  todos: '🛍️',
+}
+
+// Mapeo de nombres normalizados a nombres de categoría en products
+const categoryMapping = {
+  limpieza: 'Limpieza',
+  papeleria: 'Papelería',
+  hogar: 'Hogar',
+  jugueteria: 'Juguetería',
+  piñateria: 'Piñatería',
+  maquillaje: 'Maquillaje',
+  herramientas: 'Herramientas',
+  ferreteria: 'Ferretería',
+  clima: 'Clima y Estación',
+}
+
+// Mapeo de subcategorías normalizadas a nombres reales
+const subcategoryMapping = {
+  'limpieza-general': 'Limpieza General',
+  'desinfectantes': 'Desinfectantes',
+  'proteccion': 'Protección',
+  'cuadernos': 'Cuadernos',
+  'escritura': 'Escritura',
+  'archivos-organizadores': 'Archivos y Organizadores',
+  'decoracion': 'Decoración',
+  'baño': 'Baño',
+  'cocina': 'Cocina',
+  'juguetes-educativos': 'Juguetes Educativos',
+  'juegos-mesa': 'Juegos de Mesa',
+  'juguetes-deportivos': 'Juguetes Deportivos',
+  'piñatas': 'Piñatas',
+  'accesorios-piñatas': 'Accesorios para Piñatas',
+  'decoracion-fiestas': 'Decoración de Fiestas',
+  'base-cobertura': 'Base y Cobertura',
+  'ojos': 'Ojos',
+  'labios': 'Labios',
+  'herramientas-manuales': 'Herramientas Manuales',
+  'medicion': 'Medición',
+  'seguridad': 'Seguridad',
+  'materiales-construccion': 'Materiales de Construcción',
+  'tornillos-tuercas': 'Tornillos y Tuercas',
+  'pinturas-acabados': 'Pinturas y Acabados',
+  'productos-lluvia': 'Productos para Lluvia',
+  'productos-frio': 'Productos para Frío',
+  'productos-calor': 'Productos para Calor',
+  'productos-humedad': 'Productos para Humedad',
+  'productos-temporada': 'Productos de Temporada',
+}
+
+const CategoryPage = () => {
+  const { categoria } = useParams()
+  const [searchParams] = useSearchParams()
+  const subcategoria = searchParams.get('sub')
+
+  // Obtener el nombre real de la categoría
+  const categoryName = categoryMapping[categoria] || categoria
+
+  // Filtrar productos por categoría
+  let productosCat = categoria === 'todos' 
+    ? products 
+    : products.filter(
+        (p) => p.categoria.toLowerCase().replace(' ', '-') === categoria || p.categoria === categoryName
+      )
+
+  // Si hay subcategoría, filtrar aún más
+  if (subcategoria) {
+    const subcategoryName = subcategoryMapping[subcategoria]
+    productosCat = productosCat.filter((p) => p.subcategoria === subcategoryName)
+  }
 
   const ProductCards = ({ items }) => {
     const columnCount = useRef(0)
@@ -124,7 +190,7 @@ const CategoryHogar = () => {
                     <span className={classNames.listGridExampleLabelTitle}>{item.name}</span>
                   </Link>
                   {item.price !== undefined && (
-                    <span className={classNames.listGridExamplePrice}>${Number(item.price).toFixed(2)}</span>
+                    <span className={classNames.listGridExamplePrice}>${Number(item.price).toFixed(0)}</span>
                   )}
                   {item.description && <div className={classNames.listGridExampleDesc}>{item.description}</div>}
                 </div>
@@ -148,31 +214,26 @@ const CategoryHogar = () => {
                   onMouseEnter={(e) => (e.target.style.background = '#005a9e')}
                   onMouseLeave={(e) => (e.target.style.background = '#0078d4')}
                 >
-                  Añadir al carrito
+                  Añadir
                 </button>
               </div>
             </div>
           </div>
         )
       },
-      [classNames, addToCart],
+      [classNames, addToCart, columnCount]
     )
 
-    const getPageHeight = useCallback(() => {
-      return rowHeight.current * 3
-    }, [])
-
-    const mappedItems = useMemo(() => items.map((p) => ({ key: p.id, id: p.id, name: p.name, image: p.image, price: p.price, description: p.description })), [items])
+    const getPageHeight = useCallback(() => rowHeight.current * 3, [])
 
     return (
       <ThemeProvider>
         <FocusZone>
           <List
             className={classNames.listGridExample}
-            items={mappedItems}
+            items={items}
             getItemCountForPage={getItemCountForPage}
             getPageHeight={getPageHeight}
-            renderedWindowsAhead={4}
             onRenderCell={onRenderCell}
           />
         </FocusZone>
@@ -180,17 +241,34 @@ const CategoryHogar = () => {
     )
   }
 
+  const title = subcategoria 
+    ? `${subcategoryMapping[subcategoria] || subcategoria}` 
+    : categoryName
+
   return (
-    <div className="body-container" style={{ padding: 32 }}>
-      <div className='top'>
-        <h2>Productos para el Hogar</h2>
-        <Link to="/" className="btn-back">← Volver</Link>
-      </div>
-      <div className='cards' style={{ marginTop: 24 }}>
-        <ProductCards items={productosCat} />
+    <div className="body-container">
+      <div className="containerCards">
+        <div className="top">
+          <h2>
+            {categoryEmojis[categoria] || '📦'} {title}
+          </h2>
+          <Link to="/" className="btn-back">
+            ← Volver
+          </Link>
+        </div>
+
+        {productosCat.length > 0 ? (
+          <div className="cards">
+            <ProductCards items={productosCat} />
+          </div>
+        ) : (
+          <div style={{ padding: '40px', textAlign: 'center', color: '#666' }}>
+            <p>No hay productos en esta categoría.</p>
+          </div>
+        )}
       </div>
     </div>
   )
 }
 
-export default CategoryHogar
+export default CategoryPage

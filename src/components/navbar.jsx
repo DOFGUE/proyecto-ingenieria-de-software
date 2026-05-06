@@ -1,4 +1,4 @@
-import { Icon, TextField } from '@fluentui/react'
+import { Icon, TextField, ScrollablePane, ScrollbarVisibility } from '@fluentui/react'
 import { useState, useEffect, useContext, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useBoolean } from '@fluentui/react-hooks'
@@ -9,9 +9,89 @@ import './css/navbar.css'
 
 const categories = [
   { name: 'Todos', path: '/categoria/todos' },
-  { name: 'Limpieza', path: '/categoria/limpieza' },
-  { name: 'Papelería', path: '/categoria/papeleria' },
-  { name: 'Hogar', path: '/categoria/hogar' },
+  {
+    name: 'Limpieza',
+    path: '/categoria/limpieza',
+    subcategorias: [
+      { name: 'Limpieza General', path: '/categoria/limpieza?sub=limpieza-general' },
+      { name: 'Desinfectantes', path: '/categoria/limpieza?sub=desinfectantes' },
+      { name: 'Protección', path: '/categoria/limpieza?sub=proteccion' },
+    ]
+  },
+  {
+    name: 'Papelería',
+    path: '/categoria/papeleria',
+    subcategorias: [
+      { name: 'Cuadernos', path: '/categoria/papeleria?sub=cuadernos' },
+      { name: 'Escritura', path: '/categoria/papeleria?sub=escritura' },
+      { name: 'Archivos y Organizadores', path: '/categoria/papeleria?sub=archivos-organizadores' },
+    ]
+  },
+  {
+    name: 'Hogar',
+    path: '/categoria/hogar',
+    subcategorias: [
+      { name: 'Decoración', path: '/categoria/hogar?sub=decoracion' },
+      { name: 'Baño', path: '/categoria/hogar?sub=baño' },
+      { name: 'Cocina', path: '/categoria/hogar?sub=cocina' },
+    ]
+  },
+  {
+    name: 'Juguetería',
+    path: '/categoria/jugueteria',
+    subcategorias: [
+      { name: 'Juguetes Educativos', path: '/categoria/jugueteria?sub=juguetes-educativos' },
+      { name: 'Juegos de Mesa', path: '/categoria/jugueteria?sub=juegos-mesa' },
+      { name: 'Juguetes Deportivos', path: '/categoria/jugueteria?sub=juguetes-deportivos' },
+    ]
+  },
+  {
+    name: 'Piñatería',
+    path: '/categoria/piñateria',
+    subcategorias: [
+      { name: 'Piñatas', path: '/categoria/piñateria?sub=piñatas' },
+      { name: 'Accesorios para Piñatas', path: '/categoria/piñateria?sub=accesorios-piñatas' },
+      { name: 'Decoración de Fiestas', path: '/categoria/piñateria?sub=decoracion-fiestas' },
+    ]
+  },
+  {
+    name: 'Maquillaje',
+    path: '/categoria/maquillaje',
+    subcategorias: [
+      { name: 'Base y Cobertura', path: '/categoria/maquillaje?sub=base-cobertura' },
+      { name: 'Ojos', path: '/categoria/maquillaje?sub=ojos' },
+      { name: 'Labios', path: '/categoria/maquillaje?sub=labios' },
+    ]
+  },
+  {
+    name: 'Herramientas',
+    path: '/categoria/herramientas',
+    subcategorias: [
+      { name: 'Herramientas Manuales', path: '/categoria/herramientas?sub=herramientas-manuales' },
+      { name: 'Medición', path: '/categoria/herramientas?sub=medicion' },
+      { name: 'Seguridad', path: '/categoria/herramientas?sub=seguridad' },
+    ]
+  },
+  {
+    name: 'Ferretería',
+    path: '/categoria/ferreteria',
+    subcategorias: [
+      { name: 'Materiales de Construcción', path: '/categoria/ferreteria?sub=materiales-construccion' },
+      { name: 'Tornillos y Tuercas', path: '/categoria/ferreteria?sub=tornillos-tuercas' },
+      { name: 'Pinturas y Acabados', path: '/categoria/ferreteria?sub=pinturas-acabados' },
+    ]
+  },
+  {
+    name: 'Clima y Estación',
+    path: '/categoria/clima',
+    subcategorias: [
+      { name: 'Productos para Lluvia', path: '/categoria/clima?sub=productos-lluvia' },
+      { name: 'Productos para Frío', path: '/categoria/clima?sub=productos-frio' },
+      { name: 'Productos para Calor', path: '/categoria/clima?sub=productos-calor' },
+      { name: 'Productos para Humedad', path: '/categoria/clima?sub=productos-humedad' },
+      { name: 'Productos de Temporada', path: '/categoria/clima?sub=productos-temporada' },
+    ]
+  },
 ]
 
 const Navbar = () => {
@@ -19,6 +99,7 @@ const Navbar = () => {
   const [lastScrollY, setLastScrollY] = useState(0)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const [expandedCategory, setExpandedCategory] = useState(null)
 
   const [isCartOpen, { setTrue: openCart, setFalse: dismissCart }] = useBoolean(false)
 
@@ -65,23 +146,50 @@ const Navbar = () => {
 
       {/* SIDEBAR */}
       <div className={`side-menu ${isMenuOpen ? 'open' : ''}`}>
-        <div className="side-menu-header">
-          <span>Categorías</span>
-          <Icon iconName="Cancel" onClick={() => setIsMenuOpen(false)} />
-        </div>
+        <ScrollablePane scrollbarVisibility={ScrollbarVisibility.auto} className="side-menu-scrollable">
+          <div className="side-menu-header">
+            <span>Categorías</span>
+            <Icon iconName="Cancel" onClick={() => setIsMenuOpen(false)} />
+          </div>
 
-        <nav className="side-menu-content">
-          {categories.map((category) => (
-            <Link
-              key={category.name}
-              to={category.path}
-              className="side-menu-link"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {category.name}
-            </Link>
-          ))}
-        </nav>
+          <nav className="side-menu-content">
+            {categories.map((category) => (
+              <div key={category.name}>
+                <div className="side-menu-item">
+                  <Link
+                    to={category.path}
+                    className="side-menu-link"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {category.name}
+                  </Link>
+                  {category.subcategorias && (
+                    <Icon
+                      iconName={expandedCategory === category.name ? 'ChevronUp' : 'ChevronDown'}
+                      onClick={() => setExpandedCategory(expandedCategory === category.name ? null : category.name)}
+                      style={{ cursor: 'pointer', marginLeft: 'auto' }}
+                    />
+                  )}
+                </div>
+
+                {category.subcategorias && expandedCategory === category.name && (
+                  <div className="side-menu-submenu">
+                    {category.subcategorias.map((sub) => (
+                      <Link
+                        key={sub.name}
+                        to={sub.path}
+                        className="side-menu-sublink"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        {sub.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </nav>
+        </ScrollablePane>
       </div>
 
       {/* NAVBAR */}
