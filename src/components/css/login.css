@@ -5,8 +5,7 @@
   justify-content: center;
   padding: 40px 20px;
 
-  /* 🔥 estilo marca */
-  background: linear-gradient(135deg, #fff 0%, #c5c156 100%);
+  background: linear-gradient(135deg, #EFEAE0 0%, #dcd0ad 100%);
 }
 
 /* CARD */
@@ -42,15 +41,16 @@
 .login-logo {
   font-family: 'Changa One';
   font-size: 40px;
-  color: #b8513f;
+  color: #0A400C;
   text-decoration: none;
   margin-bottom: 16px;
   display: inline-block;
 }
 
 .login-title {
-  font-family: 'Bebas';
+  font-family: 'Changa One';
   font-size: 26px;
+  font-weight: 80;
   color: #111;
   margin: 0 0 8px 0;
   letter-spacing: 1px;
@@ -82,7 +82,7 @@
 .login-show-password {
   background: none;
   border: none;
-  color: #b8513f;
+  color: #0B520E;
   font-size: 13px;
   cursor: pointer;
   margin-bottom: 16px;
@@ -94,12 +94,12 @@
 
 /* ERROR */
 .login-error {
-  background: rgba(184, 81, 63, 0.1);
-  border: 1px solid #b8513f;
+  background: rgba(10, 64, 12, 0.1);
+  border: 1px solid #0A400C;
   border-radius: 8px;
   padding: 12px 16px;
   margin-bottom: 16px;
-  color: #b8513f;
+  color: #0A400C;
   font-size: 14px;
   text-align: center;
 }
@@ -121,12 +121,12 @@
 }
 
 .login-remember input {
-  accent-color: #b8513f;
+  accent-color: #0A400C;
 }
 
 .login-forgot {
   font-size: 14px;
-  color: #b8513f;
+  color: #0B520E;
   text-decoration: none;
 }
 
@@ -136,13 +136,13 @@
 
 /* BOTÓN */
 .login-button {
-  background: #b8513f !important;
+  background: #0A400C !important;
   border-radius: 10px !important;
   color: #fff !important;
 }
 
 .login-button:hover {
-  background: #9e4435 !important;
+  background: #0B520E !important;
 }
 
 /* DIVIDER */
@@ -197,8 +197,8 @@
 
 /* ICONOS SOCIAL */
 .login-social-button .ms-Icon {
-  background: #111;
-  color: #d0cc5b;
+  background: #0A400C;
+  color: #EFEAE0;
   padding: 6px;
   border-radius: 50%;
 }
@@ -213,7 +213,7 @@
 }
 
 .login-register {
-  color: #b8513f;
+  color: #0B520E;
   font-weight: 600;
   text-decoration: none;
 }
@@ -234,7 +234,7 @@
 }
 
 .login-back:hover {
-  color: #b8513f;
+  color: #0B520E;
 }
 
 /* RESPONSIVE */

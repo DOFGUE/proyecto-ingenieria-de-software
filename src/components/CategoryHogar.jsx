@@ -184,7 +184,7 @@ const CategoryHogar = () => {
     <div className="body-container" style={{ padding: 32 }}>
       <div className='top'>
         <h2>Productos para el Hogar</h2>
-        <Link to="/">Volver</Link>
+        <Link to="/" className="btn-back">← Volver</Link>
       </div>
       <div className='cards' style={{ marginTop: 24 }}>
         <ProductCards items={productosCat} />

@@ -103,7 +103,7 @@ const Navbar = () => {
 
           {/* LOGO */}
           <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-            <div className="navbar-brand">ELREY</div>
+            <div className="navbar-brand">EL REY</div>
           </Link>
 
           {/* ACCIONES */}

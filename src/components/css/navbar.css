@@ -20,7 +20,7 @@
 }
 
 .search-container.active {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(10, 64, 12, 0.2);
   backdrop-filter: blur(8px);
   padding: 4px 10px;
   border-radius: 20px;
@@ -53,12 +53,12 @@
 
 .search-input .ms-TextField-field {
   background: transparent !important;
-  color: #111;
+  color: #EFEAE0;
   outline: none !important;
 }
 
 .search-input .ms-TextField-field::placeholder {
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(239, 234, 224, 0.5);
 }
 
 .search-input input {
@@ -71,8 +71,8 @@
 ========================= */
 .navbar-shell {
   width: 100%;
-  background: #d0cc5b;
-  color: #000000;
+  background: #0A400C;
+  color: #EFEAE0;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -89,8 +89,8 @@
 
 /* TOPBAR MEJORADO */
 .navbar-topbar {
-  background: rgba(255, 255, 255, 0.85);
-  color: #b8513f;
+  background: rgba(11, 82, 14, 0.85);
+  color: #EFEAE0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -105,13 +105,13 @@
 
 .navbar-topbar-link {
   text-decoration: none;
-  color: #b8513f;
+  color: #EFEAE0;
   font-weight: 500;
   transition: all 0.2s ease;
 }
 
 .navbar-topbar-link:hover {
-  color: #000000; /* tu color de marca */
+  color: #B7AB86;
 }
 
 /* MAINBAR */
@@ -125,7 +125,7 @@
 /* LOGO */
 .navbar-brand {
   font-family: 'Changa One';
-  color: #b8513f;
+  color: #EFEAE0;
   font-size: 60px;
 }
 
@@ -138,7 +138,7 @@
 
 .navbar-action-icon {
   font-size: 24px;
-  color: #111;
+  color: #EFEAE0;
   cursor: pointer;
 }
 
@@ -150,7 +150,7 @@
 .menu-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(239, 234, 224, 0.35);
   backdrop-filter: blur(3px);
   z-index: 998;
   animation: fadeOverlay 0.25s ease;
@@ -163,11 +163,11 @@
   left: -280px;
   width: 280px;
   height: 100%;
-  background: #e1dfc0;
+  background: #0A400C;
   z-index: 999;
   display: flex;
   flex-direction: column;
-  box-shadow: 6px 0 24px rgba(0, 0, 0, 0.12);
+  box-shadow: 6px 0 24px rgba(239, 234, 224, 0.12);
   transition: left 0.3s ease;
 }
 
@@ -181,28 +181,27 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px 22px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  background: #ffffff;
+  border-bottom: 1px solid rgba(239, 234, 224, 0.08);
+  background: #0A400C;
 }
 
 .side-menu-header span {
   font-family: 'changa one';
   font-size: 24px;
   letter-spacing: 1px;
-  color: #b8513f
-;
+  color: #EFEAE0;
 }
 
 /* Icono cerrar */
 .side-menu-header .ms-Icon {
   cursor: pointer;
   font-size: 18px;
-  color: #111;
+  color: #EFEAE0;
   transition: all 0.2s ease;
 }
 
 .side-menu-header .ms-Icon:hover {
-  color: #b8513f !important;
+  color: #B7AB86 !important;
   transform: rotate(90deg);
 }
 
@@ -217,7 +216,7 @@
 .side-menu-link {
   padding: 15px 24px;
   text-decoration: none;
-  color: #333;
+  color: #EFEAE0;
   font-size: 16px;
   font-weight: 500;
   border-left: 4px solid transparent;
@@ -226,9 +225,9 @@
 
 /* Hover */
 .side-menu-link:hover {
-  background: rgba(184, 81, 63, 0.08);
-  color: #b8513f;
-  border-left: 4px solid #b8513f;
+  background: rgba(239, 234, 224, 0.15);
+  color: #EFEAE0;
+  border-left: 4px solid #B7AB86;
   padding-left: 30px;
 }
 
