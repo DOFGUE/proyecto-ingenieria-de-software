@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { weatherRecommendations } from '../data/weatherRecommendations'
 
-const WEATHER_API_KEY = 'bf7e988f3b3adb3769f80d81a2510e2d'
+const WEATHER_API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY
 const WEATHER_API_URL = 'https://api.openweathermap.org/data/2.5/weather'
 
 export const useWeatherRecommendations = (latitude = 2.9271, longitude = -75.2898) => {
