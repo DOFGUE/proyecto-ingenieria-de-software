@@ -16,7 +16,6 @@ const Footer = () => {
           <ul>
             <li><Link to="/about">Sobre Nosotros</Link></li>
             <li><Link to="/categoria/todos">Productos</Link></li>
-            <li><a href="https://wa.me/3174865490" target="_blank" rel="noreferrer noopener">Contacto</a></li>
             <li><Link to="/blog">Blog</Link></li>
           </ul>
         </div>

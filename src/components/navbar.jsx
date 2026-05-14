@@ -1,7 +1,8 @@
 import { Icon, TextField, ScrollablePane, ScrollbarVisibility } from '@fluentui/react'
-import { useState, useEffect, useContext, useRef } from 'react'
+import { useState, useEffect, useContext, useRef, useCallback, useMemo } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useBoolean } from '@fluentui/react-hooks'
+import gsap from 'gsap'
 import ShoppingCart from './ShoppingCart'
 import { CartContext } from '../context/CartContext'
 import { useAuth } from '../context/AuthContext'
@@ -108,6 +109,45 @@ const Navbar = () => {
   const navigate = useNavigate()
 
   const searchRef = useRef(null)
+  const sideMenuRef = useRef(null)
+  const overlayRef = useRef(null)
+
+  // Memoizar funciones para evitar re-renders
+  const handleMenuOpen = useCallback(() => {
+    setIsMenuOpen(true)
+    gsap.to(sideMenuRef.current, {
+      left: 0,
+      duration: 0.3,
+      ease: 'power3.out',
+    })
+    if (overlayRef.current) {
+      gsap.to(overlayRef.current, {
+        opacity: 1,
+        duration: 0.3,
+        ease: 'power3.out',
+      })
+    }
+  }, [])
+
+  const handleMenuClose = useCallback(() => {
+    gsap.to(sideMenuRef.current, {
+      left: -280,
+      duration: 0.3,
+      ease: 'power3.out',
+    })
+    if (overlayRef.current) {
+      gsap.to(overlayRef.current, {
+        opacity: 0,
+        duration: 0.3,
+        ease: 'power3.out',
+      })
+    }
+    setIsMenuOpen(false)
+  }, [])
+
+  const handleCategoryToggle = useCallback((categoryName) => {
+    setExpandedCategory((prev) => (prev === categoryName ? null : categoryName))
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -141,15 +181,15 @@ const Navbar = () => {
     <>
       {/* OVERLAY */}
       {isMenuOpen && (
-        <div className="menu-overlay" onClick={() => setIsMenuOpen(false)} />
+        <div className="menu-overlay" ref={overlayRef} onClick={handleMenuClose} />
       )}
 
       {/* SIDEBAR */}
-      <div className={`side-menu ${isMenuOpen ? 'open' : ''}`}>
+      <div className="side-menu" ref={sideMenuRef}>
         <ScrollablePane scrollbarVisibility={ScrollbarVisibility.auto} className="side-menu-scrollable">
           <div className="side-menu-header">
             <span>Categorías</span>
-            <Icon iconName="Cancel" onClick={() => setIsMenuOpen(false)} />
+            <Icon iconName="Cancel" onClick={handleMenuClose} />
           </div>
 
           <nav className="side-menu-content">
@@ -159,14 +199,14 @@ const Navbar = () => {
                   <Link
                     to={category.path}
                     className="side-menu-link"
-                    onClick={() => setIsMenuOpen(false)}
+                    onClick={handleMenuClose}
                   >
                     {category.name}
                   </Link>
                   {category.subcategorias && (
                     <Icon
                       iconName={expandedCategory === category.name ? 'ChevronUp' : 'ChevronDown'}
-                      onClick={() => setExpandedCategory(expandedCategory === category.name ? null : category.name)}
+                      onClick={() => handleCategoryToggle(category.name)}
                       style={{ cursor: 'pointer', marginLeft: 'auto' }}
                     />
                   )}
@@ -179,7 +219,7 @@ const Navbar = () => {
                         key={sub.name}
                         to={sub.path}
                         className="side-menu-sublink"
-                        onClick={() => setIsMenuOpen(false)}
+                        onClick={handleMenuClose}
                       >
                         {sub.name}
                       </Link>
@@ -206,7 +246,7 @@ const Navbar = () => {
           <Icon
             iconName="GlobalNavButton"
             className="navbar-action-icon"
-            onClick={() => setIsMenuOpen(true)}
+            onClick={handleMenuOpen}
           />
 
           {/* LOGO */}
@@ -249,7 +289,6 @@ const Navbar = () => {
             {/* 👤 USUARIO */}
             {isLoggedIn === 1 ? (
               <>
-                <Icon iconName="Contact" className="navbar-action-icon" onClick={() => navigate('/dataperfil')} />
                 <Icon iconName="Shop" className="navbar-action-icon" onClick={() => navigate('/myshops')} />
                 <Icon iconName="Settings" className="navbar-action-icon" onClick={() => navigate('/config')} />
                 <Icon

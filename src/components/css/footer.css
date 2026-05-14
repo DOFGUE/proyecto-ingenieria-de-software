@@ -53,7 +53,6 @@
 .social-links {
     display: flex;
     flex-direction: column; 
-    gap: 10px;
 }
 
 .social-links a {
@@ -62,13 +61,13 @@
     gap: 10px;
     padding: 10px 14px;
     border-radius: 12px;
-    background: rgba(239, 234, 224, 0.1);
+    background: transparent;
     color: #EFEAE0;
     transition: all 0.2s ease;
 }
 
 .social-links a:hover {
-    background: rgba(239, 234, 224, 0.2);
+    background: transparent;
     transform: translateY(-2px);
     color: #B7AB86;
 }

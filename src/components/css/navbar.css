@@ -150,10 +150,11 @@
 .menu-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(239, 234, 224, 0.35);
-  backdrop-filter: blur(3px);
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
   z-index: 998;
-  animation: fadeOverlay 0.25s ease;
+  will-change: opacity;
+  opacity: 1;
 }
 
 /* Contenedor */
@@ -163,16 +164,12 @@
   left: -280px;
   width: 280px;
   height: 100%;
-  background: #0A400C;
+  background: linear-gradient(180deg, #0A400C 0%, #0d5c0f 100%);
   z-index: 999;
   display: flex;
   flex-direction: column;
-  box-shadow: 6px 0 24px rgba(239, 234, 224, 0.12);
-  transition: left 0.3s ease;
-}
-
-.side-menu.open {
-  left: 0;
+  box-shadow: 8px 0 32px rgba(0, 0, 0, 0.3);
+  will-change: left;
 }
 
 /* Header */
@@ -237,13 +234,15 @@
   font-size: 16px;
   font-weight: 500;
   border-left: 4px solid transparent;
-  transition: all 0.25s ease;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  will-change: background, color, border-left, padding-left;
 }
 
 /* Hover */
 .side-menu-link:hover {
-  background: rgba(239, 234, 224, 0.15);
-  color: #EFEAE0;
+  background: rgba(183, 171, 134, 0.1);
+  color: #B7AB86;
   border-left: 4px solid #B7AB86;
   padding-left: 30px;
 }
@@ -260,11 +259,12 @@
   font-size: 16px;
   font-weight: 500;
   border-left: 4px solid transparent;
-  transition: all 0.25s ease;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
 }
 
 .side-menu-item:hover {
-  background: rgba(239, 234, 224, 0.15);
+  background: rgba(183, 171, 134, 0.1);
   border-left: 4px solid #B7AB86;
   padding-left: 30px;
 }
@@ -273,26 +273,29 @@
 .side-menu-item .ms-Icon {
   color: #B7AB86;
   font-size: 14px;
-  transition: transform 0.25s ease;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Menú de subcategorías */
 .side-menu-submenu {
-  background: rgba(10, 64, 12, 0.2);
+  background: rgba(183, 171, 134, 0.08);
   border-left: 4px solid #B7AB86;
   display: flex;
   flex-direction: column;
-  animation: slideDown 0.25s ease;
+  animation: slideDown 0.15s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  will-change: opacity, max-height, transform;
 }
 
 @keyframes slideDown {
   from {
     opacity: 0;
     max-height: 0;
+    transform: translateY(-10px);
   }
   to {
     opacity: 1;
     max-height: 500px;
+    transform: translateY(0);
   }
 }
 
@@ -300,18 +303,18 @@
 .side-menu-sublink {
   padding: 12px 24px 12px 48px;
   text-decoration: none;
-  color: #D4CEBF;
+  color: rgba(239, 234, 224, 0.85);
   font-size: 14px;
   font-weight: 400;
-  transition: all 0.25s ease;
-  border-left: 2px solid transparent;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border-left: 3px solid transparent;
 }
 
 .side-menu-sublink:hover {
-  background: rgba(239, 234, 224, 0.1);
-  color: #EFEAE0;
-  border-left: 2px solid #B7AB86;
-  padding-left: 52px;
+  background: rgba(183, 171, 134, 0.1);
+  color: #B7AB86;
+  border-left: 3px solid #B7AB86;
+  padding-left: 54px;
 }
 
 /* Animación overlay */

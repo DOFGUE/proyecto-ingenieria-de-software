@@ -1,92 +1,9 @@
-import React, { useRef, useCallback, useMemo, useContext } from 'react'
-import { FocusZone, List, mergeStyleSets, useTheme, ThemeProvider, initializeIcons } from '@fluentui/react'
+import React, { useRef, useContext, useEffect } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
 import { CartContext } from '../context/CartContext'
+import gsap from 'gsap'
 import products from '../data/products'
 import './css/body.css'
-
-initializeIcons()
-
-const generateStyles = (theme) => {
-  const { palette, fonts } = theme
-  return mergeStyleSets({
-    listGridExample: {
-      overflow: 'hidden',
-      fontSize: 0,
-      position: 'relative',
-    },
-    listGridExampleTile: {
-      textAlign: 'center',
-      outline: 'none',
-      position: 'relative',
-      float: 'left',
-      boxSizing: 'border-box',
-      margin: 8,
-      background: palette.neutralLighter,
-    },
-    listGridExampleSizer: {
-      paddingBottom: '100%',
-    },
-    listGridExamplePadder: {
-      position: 'absolute',
-      left: 2,
-      top: 2,
-      right: 2,
-      bottom: 2,
-    },
-    listGridExampleLabel: {
-      background: 'rgba(0, 0, 0, 0.3)',
-      color: palette.white,
-      position: 'absolute',
-      padding: 10,
-      bottom: 0,
-      left: 0,
-      width: '100%',
-      fontSize: fonts.small.fontSize,
-      boxSizing: 'border-box',
-    },
-    listGridExampleLabelTitle: {
-      fontWeight: 600,
-      display: 'block',
-      marginBottom: 4,
-    },
-    listGridExamplePrice: {
-      fontWeight: 700,
-      display: 'block',
-      marginBottom: 6,
-    },
-    listGridExampleDesc: {
-      display: '-webkit-box',
-      WebkitLineClamp: 2,
-      WebkitBoxOrient: 'vertical',
-      overflow: 'hidden',
-      textOverflow: 'ellipsis',
-      fontSize: fonts.xSmall.fontSize,
-      opacity: 0.95,
-    },
-    listGridExampleImage: {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      height: '100%',
-      width: '100%',
-    },
-  })
-}
-
-// Mapeo de categorías a emojis
-const categoryEmojis = {
-  limpieza: '🧹',
-  papeleria: '📝',
-  hogar: '🏠',
-  jugueteria: '🧩',
-  piñateria: '🎉',
-  maquillaje: '💄',
-  herramientas: '🔧',
-  ferreteria: '🪛',
-  clima: '🌤️',
-  todos: '🛍️',
-}
 
 // Mapeo de nombres normalizados a nombres de categoría en products
 const categoryMapping = {
@@ -134,10 +51,42 @@ const subcategoryMapping = {
   'productos-temporada': 'Productos de Temporada',
 }
 
+// Componente de Card Individual
+const ProductCard = ({ item, addToCart, cardRef }) => {
+  return (
+    <div ref={cardRef} className="product-card">
+      <div className="product-card-image">
+        <Link to={`/product/${item.id}`} className="product-card-image-link">
+          <img src={item.image} alt={item.name} />
+        </Link>
+      </div>
+
+      <div className="product-card-content">
+        <Link to={`/product/${item.id}`} className="product-card-link">
+          <h3 className="product-card-name">{item.name}</h3>
+          <p className="product-card-description">{item.description}</p>
+        </Link>
+
+        <div className="product-card-footer">
+          <span className="product-card-price">${Number(item.price).toFixed(0)}</span>
+          <button
+            onClick={() => addToCart(item)}
+            className="product-card-btn"
+          >
+            Añadir
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 const CategoryPage = () => {
   const { categoria } = useParams()
   const [searchParams] = useSearchParams()
   const subcategoria = searchParams.get('sub')
+  const { addToCart } = useContext(CartContext)
+  const cardsRef = useRef([])
 
   // Obtener el nombre real de la categoría
   const categoryName = categoryMapping[categoria] || categoria
@@ -155,91 +104,22 @@ const CategoryPage = () => {
     productosCat = productosCat.filter((p) => p.subcategoria === subcategoryName)
   }
 
-  const ProductCards = ({ items }) => {
-    const columnCount = useRef(0)
-    const rowHeight = useRef(0)
-    const theme = useTheme()
-    const classNames = useMemo(() => generateStyles(theme), [theme])
-    const { addToCart } = useContext(CartContext)
+  // Animar cards cuando se cargan o cuando cambia el contenido
+  useEffect(() => {
+    if (cardsRef.current.length === 0) return
 
-    const getItemCountForPage = useCallback((itemIndex, surfaceRect) => {
-      if (itemIndex === 0) {
-        columnCount.current = Math.max(1, Math.floor(surfaceRect.width / 250))
-        rowHeight.current = Math.floor(surfaceRect.width / columnCount.current)
-      }
-      return columnCount.current * 3
-    }, [])
+    // Establecer estado inicial
+    gsap.set(cardsRef.current, { opacity: 0, y: -40 })
 
-    const onRenderCell = useCallback(
-      (item, index) => {
-        return (
-          <div
-            className={classNames.listGridExampleTile}
-            data-is-focusable
-            style={{
-              width: `calc(${100 / Math.max(1, columnCount.current)}% - 16px)`,
-            }}
-          >
-            <div className={classNames.listGridExampleSizer}>
-              <div className={classNames.listGridExamplePadder}>
-                <Link to={`/product/${item.id}`} style={{ display: 'block', height: '100%' }}>
-                  <img src={item.image} alt={item.name} className={classNames.listGridExampleImage} />
-                </Link>
-                <div className={classNames.listGridExampleLabel} style={{ paddingBottom: 50 }}>
-                  <Link to={`/product/${item.id}`} style={{ color: 'inherit', textDecoration: 'none' }}>
-                    <span className={classNames.listGridExampleLabelTitle}>{item.name}</span>
-                  </Link>
-                  {item.price !== undefined && (
-                    <span className={classNames.listGridExamplePrice}>${Number(item.price).toFixed(0)}</span>
-                  )}
-                  {item.description && <div className={classNames.listGridExampleDesc}>{item.description}</div>}
-                </div>
-                <button
-                  onClick={() => addToCart(item)}
-                  style={{
-                    position: 'absolute',
-                    bottom: 10,
-                    left: 10,
-                    right: 10,
-                    padding: '6px 8px',
-                    background: '#0078d4',
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: 2,
-                    cursor: 'pointer',
-                    fontSize: 12,
-                    fontWeight: 600,
-                    transition: 'background 0.2s',
-                  }}
-                  onMouseEnter={(e) => (e.target.style.background = '#005a9e')}
-                  onMouseLeave={(e) => (e.target.style.background = '#0078d4')}
-                >
-                  Añadir
-                </button>
-              </div>
-            </div>
-          </div>
-        )
-      },
-      [classNames, addToCart, columnCount]
-    )
-
-    const getPageHeight = useCallback(() => rowHeight.current * 3, [])
-
-    return (
-      <ThemeProvider>
-        <FocusZone>
-          <List
-            className={classNames.listGridExample}
-            items={items}
-            getItemCountForPage={getItemCountForPage}
-            getPageHeight={getPageHeight}
-            onRenderCell={onRenderCell}
-          />
-        </FocusZone>
-      </ThemeProvider>
-    )
-  }
+    // Animar caída suave
+    gsap.to(cardsRef.current, {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      ease: 'power3.out',
+      stagger: 0.08,
+    })
+  }, [productosCat])
 
   const title = subcategoria 
     ? `${subcategoryMapping[subcategoria] || subcategoria}` 
@@ -249,17 +129,22 @@ const CategoryPage = () => {
     <div className="body-container">
       <div className="containerCards">
         <div className="top">
-          <h2>
-            {categoryEmojis[categoria] || '📦'} {title}
-          </h2>
+          <h2>{title}</h2>
           <Link to="/" className="btn-back">
             ← Volver
           </Link>
         </div>
 
         {productosCat.length > 0 ? (
-          <div className="cards">
-            <ProductCards items={productosCat} />
+          <div className="products-grid">
+            {productosCat.map((item, index) => (
+              <ProductCard
+                key={item.id}
+                item={item}
+                addToCart={addToCart}
+                cardRef={(el) => (cardsRef.current[index] = el)}
+              />
+            ))}
           </div>
         ) : (
           <div style={{ padding: '40px', textAlign: 'center', color: '#666' }}>

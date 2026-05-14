@@ -1,0 +1,357 @@
+.weather-carousel-container {
+  width: 100%;
+  padding: 20px 20px;
+  background: linear-gradient(135deg, #0a400c 0%, #0d5c0f 100%);
+  color: #EFEAE0;
+  border-radius: 12px;
+  margin: 40px 0;
+}
+
+.carousel-header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.carousel-header h2 {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+  color: #EFEAE0;
+}
+
+.carousel-header p {
+  font-size: 16px;
+  margin: 5px 0;
+  opacity: 0.9;
+}
+
+.weather-temp-info {
+  font-size: 18px;
+  margin-top: 15px !important;
+  font-weight: 600;
+  color: #B7AB86;
+}
+
+/* WRAPPER Y LAYOUT */
+.carousel-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  perspective: 1000px;
+  min-height: 400px;
+}
+
+/* ITEMS DEL CARRUSEL */
+.carousel-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: opacity, transform;
+}
+
+/* PRODUCTOS LATERALES */
+.carousel-side {
+  flex: 0 0 140px;
+  height: 140px;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-side:hover {
+  opacity: 0.7;
+  transform: scale(1.05);
+}
+
+.side-product {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid rgba(183, 171, 134, 0.3);
+}
+
+.side-product img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.side-label {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  color: #EFEAE0;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  margin: 0;
+}
+
+/* PRODUCTO CENTRAL */
+.carousel-center {
+  flex: 0 0 400px;
+  z-index: 10;
+}
+
+.center-product {
+  background: linear-gradient(135deg, rgba(183, 171, 134, 0.15) 0%, rgba(183, 171, 134, 0.05) 100%);
+  border: 2px solid rgba(183, 171, 134, 0.5);
+  border-radius: 16px;
+  overflow: hidden;
+  backdrop-filter: blur(15px);
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  will-change: transform, box-shadow;
+}
+
+.center-product:hover {
+  border-color: rgba(183, 171, 134, 0.9);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  transform: translateY(-4px);
+}
+
+.center-image-link {
+  display: block;
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  text-decoration: none;
+}
+
+.center-image-link img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.center-image-link:hover img {
+  transform: scale(1.05);
+}
+
+.center-content {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.center-name {
+  font-size: 26px;
+  font-weight: 800;
+  margin: 0 0 12px 0;
+  color: #EFEAE0;
+  letter-spacing: -0.5px;
+}
+
+.center-description {
+  font-size: 14px;
+  color: rgba(239, 234, 224, 0.85);
+  margin: 0 0 18px 0;
+  line-height: 1.6;
+  flex-grow: 1;
+}
+
+.center-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: auto;
+}
+
+.center-price {
+  font-size: 32px;
+  font-weight: 800;
+  color: #B7AB86;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.center-add-btn {
+  flex: 1;
+  padding: 14px 24px;
+  background: linear-gradient(135deg, #B7AB86 0%, #a89968 100%);
+  color: #0a400c;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 12px rgba(183, 171, 134, 0.25);
+  will-change: transform, box-shadow;
+}
+
+.center-add-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(183, 171, 134, 0.4);
+}
+
+.center-add-btn:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+/* CONTROLES */
+.carousel-control {
+  display: none;
+}
+
+/* INDICADOR */
+.carousel-indicator {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 20px;
+  padding-bottom: 10px;
+}
+
+.indicator-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(183, 171, 134, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid rgba(183, 171, 134, 0.5);
+}
+
+.indicator-dot.active {
+  background: #B7AB86;
+  width: 30px;
+  border-radius: 5px;
+  border-color: #B7AB86;
+}
+
+.indicator-dot:hover {
+  background: rgba(183, 171, 134, 0.6);
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .carousel-center {
+    flex: 0 0 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel-wrapper {
+    gap: 10px;
+    min-height: 350px;
+  }
+
+  .carousel-side {
+    flex: 0 0 100px;
+    height: 100px;
+  }
+
+  .carousel-center {
+    flex: 0 0 280px;
+  }
+
+  .center-image-link {
+    height: 180px;
+    margin-bottom: 12px;
+  }
+
+  .center-content {
+    padding: 15px;
+  }
+
+  .center-name {
+    font-size: 18px;
+  }
+
+  .center-description {
+    font-size: 12px;
+  }
+
+  .center-price {
+    font-size: 22px;
+  }
+
+  .center-add-btn {
+    padding: 10px 15px;
+    font-size: 12px;
+  }
+
+  .carousel-control {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  .carousel-control-prev {
+    left: -40px;
+  }
+
+  .carousel-control-next {
+    right: -40px;
+  }
+
+  .carousel-header h2 {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .weather-carousel-container {
+    padding: 20px 10px;
+    margin: 20px 0;
+  }
+
+  .carousel-wrapper {
+    gap: 5px;
+  }
+
+  .carousel-side {
+    display: none;
+  }
+
+  .carousel-center {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .center-image-link {
+    height: 200px;
+  }
+
+  .carousel-control {
+    position: fixed;
+    top: 50%;
+    width: 45px;
+    height: 45px;
+  }
+
+  .carousel-control-prev {
+    left: 10px;
+  }
+
+  .carousel-control-next {
+    right: 10px;
+  }
+
+  .carousel-header h2 {
+    font-size: 20px;
+  }
+
+  .carousel-header p {
+    font-size: 13px;
+  }
+
+  .weather-temp-info {
+    font-size: 14px;
+  }
+}

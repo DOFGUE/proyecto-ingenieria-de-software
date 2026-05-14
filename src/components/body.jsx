@@ -1,15 +1,11 @@
-import React, { useState, useEffect, useRef, useCallback, useMemo, useContext } from 'react'
-import { Icon, FocusZone, List, mergeStyleSets, useTheme, ThemeProvider, initializeIcons } from '@fluentui/react'
+import React, { useState, useEffect } from 'react'
+import { Icon } from '@fluentui/react'
 import { Link } from 'react-router-dom'
-import { CartContext } from '../context/CartContext'
 import limpieza from './image/limpieza.jpg'
 import hogar from './image/hogar.jpg'
 import oficina from './image/oficina.jpg'
 import './css/body.css'
-import products from '../data/products'
-import { WeatherRecommendations } from './WeatherRecommendations'
-
-initializeIcons()
+import { WeatherCarousel } from './WeatherCarousel'
 
 const carouselItems = [
   {
@@ -34,7 +30,6 @@ const carouselItems = [
 
 export const Body = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [mostrarProductos, setMostrarProductos] = useState(false)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -52,117 +47,6 @@ export const Body = () => {
   }
 
   const currentItem = carouselItems[currentIndex]
-  const productosAMostrar = products.slice(0, 8)
-
-  const generateStyles = (theme) => {
-    const { palette, fonts } = theme
-    return mergeStyleSets({
-      listGridExample: {
-        overflow: 'hidden',
-        fontSize: 0,
-      },
-      listGridExampleTile: {
-        position: 'relative',
-        float: 'left',
-        margin: 8,
-        background: palette.neutralLighter,
-      },
-      listGridExampleSizer: {
-        paddingBottom: '100%',
-      },
-      listGridExamplePadder: {
-        position: 'absolute',
-        inset: 2,
-      },
-      listGridExampleLabel: {
-        background: 'rgba(0,0,0,0.3)',
-        color: '#fff',
-        position: 'absolute',
-        bottom: 0,
-        width: '100%',
-        padding: 10,
-        fontSize: fonts.small.fontSize,
-      },
-      listGridExampleImage: {
-        position: 'absolute',
-        width: '100%',
-        height: '100%',
-        objectFit: 'cover',
-      },
-    })
-  }
-
-  const ProductCards = ({ items }) => {
-    const columnCount = useRef(0)
-    const rowHeight = useRef(0)
-    const theme = useTheme()
-    const classNames = useMemo(() => generateStyles(theme), [theme])
-    const { addToCart } = useContext(CartContext)
-
-    const getItemCountForPage = useCallback((index, rect) => {
-      if (index === 0) {
-        columnCount.current = Math.max(1, Math.floor(rect.width / 250))
-        rowHeight.current = Math.floor(rect.width / columnCount.current)
-      }
-      return columnCount.current * 3
-    }, [])
-
-    const getPageHeight = useCallback(() => rowHeight.current * 3, [])
-
-    const onRenderCell = (item) => (
-      <div
-        className={classNames.listGridExampleTile}
-        style={{
-          width: `calc(${100 / Math.max(1, columnCount.current)}% - 16px)`,
-        }}
-      >
-        <div className={classNames.listGridExampleSizer}>
-          <div className={classNames.listGridExamplePadder}>
-            <Link to={`/product/${item.id}`}>
-              <img src={item.image} alt={item.name} className={classNames.listGridExampleImage} />
-            </Link>
-
-            <div className={classNames.listGridExampleLabel}>
-              <span>{item.name}</span>
-              <br />
-              <strong>${Number(item.price).toFixed(2)}</strong>
-            </div>
-
-            <button
-              onClick={() => addToCart(item)}
-              style={{
-                position: 'absolute',
-                bottom: 10,
-                left: 10,
-                right: 10,
-                background: '#0078d4',
-                color: '#fff',
-                border: 'none',
-                padding: 6,
-                cursor: 'pointer',
-              }}
-            >
-              Añadir
-            </button>
-          </div>
-        </div>
-      </div>
-    )
-
-    return (
-      <ThemeProvider>
-        <FocusZone>
-          <List
-            className={classNames.listGridExample}
-            items={items}
-            getItemCountForPage={getItemCountForPage}
-            getPageHeight={getPageHeight}
-            onRenderCell={onRenderCell}
-          />
-        </FocusZone>
-      </ThemeProvider>
-    )
-  }
 
   return (
     <div className="body-container">
@@ -197,26 +81,7 @@ export const Body = () => {
             <Icon iconName="ChevronRight" />
           </button>
       </div>
-      <WeatherRecommendations />
-      {/* BOTÓN PARA MOSTRAR PRODUCTOS */}
-      <div className="containerCards">
-        <div className="top">
-          <h2>Productos Destacados</h2>
-
-        <button
-          className="toggle-products-btn"
-          onClick={() => setMostrarProductos(!mostrarProductos)}
-        >
-          {mostrarProductos ? 'Ocultar productos' : 'Mostrar productos destacados'}
-        </button>
-        </div>
-
-        {mostrarProductos && (
-          <div className="cards">
-            <ProductCards items={productosAMostrar} />
-          </div>
-        )}
-      </div>
+      <WeatherCarousel />
     </div>
   )
 }

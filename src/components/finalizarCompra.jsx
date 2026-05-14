@@ -152,9 +152,9 @@ const FinalizarCompra = () => {
                   <div key={item.id} className="receipt-item">
                     <div className="receipt-item-info">
                       <p className="receipt-item-name">{item.name}</p>
-                      <p className="receipt-item-detail">Cantidad: {item.quantity} x €{item.price.toFixed(2)}</p>
+                      <p className="receipt-item-detail">Cantidad: {item.quantity} x ${item.price.toFixed(2)}</p>
                     </div>
-                    <p className="receipt-item-price">€{(item.price * item.quantity).toFixed(2)}</p>
+                    <p className="receipt-item-price">${(item.price * item.quantity).toFixed(2)}</p>
                   </div>
                 ))}
               </div>
@@ -163,7 +163,7 @@ const FinalizarCompra = () => {
             <div className="receipt-summary">
               <div className="receipt-summary-item">
                 <span>Subtotal:</span>
-                <span>€{purchaseData.total.toFixed(2)}</span>
+                <span>${purchaseData.total.toFixed(2)}</span>
               </div>
               <div className="receipt-summary-item">
                 <span>Envío:</span>
@@ -171,7 +171,7 @@ const FinalizarCompra = () => {
               </div>
               <div className="receipt-summary-total">
                 <span>Total:</span>
-                <span>€{purchaseData.total.toFixed(2)}</span>
+                <span>${purchaseData.total.toFixed(2)}</span>
               </div>
             </div>
 
@@ -382,7 +382,7 @@ const FinalizarCompra = () => {
                       <p className="summary-item-quantity">Cantidad: {item.quantity}</p>
                     </div>
                     <p className="summary-item-price">
-                      €{(item.price * item.quantity).toFixed(2)}
+                      ${ (item.price * item.quantity).toFixed(2) }
                     </p>
                   </div>
                 ))}
@@ -390,7 +390,7 @@ const FinalizarCompra = () => {
 
               <div className="summary-subtotal">
                 <span>Subtotal</span>
-                <span>€{getTotalPrice().toFixed(2)}</span>
+                <span>${getTotalPrice().toFixed(2)}</span>
               </div>
               <div className="summary-shipping">
                 <span>Envío</span>
@@ -398,7 +398,7 @@ const FinalizarCompra = () => {
               </div>
               <div className="summary-total">
                 <span>Total</span>
-                <span>€{getTotalPrice().toFixed(2)}</span>
+                <span>${getTotalPrice().toFixed(2)}</span>
               </div>
             </>
           )}
