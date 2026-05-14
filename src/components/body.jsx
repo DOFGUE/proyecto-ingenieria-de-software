@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Icon } from '@fluentui/react'
 import { Link } from 'react-router-dom'
+import gsap from 'gsap'
 import limpieza from './image/limpieza.jpg'
 import hogar from './image/hogar.jpg'
 import oficina from './image/oficina.jpg'
@@ -30,6 +31,10 @@ const carouselItems = [
 
 export const Body = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
+  const carouselContentRef = useRef(null)
+  const currentImageRef = useRef(null)
+  const nextImageRef = useRef(null)
+  const carouselTextRef = useRef(null)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -37,6 +42,41 @@ export const Body = () => {
     }, 5000)
     return () => clearInterval(interval)
   }, [])
+
+  // Animar cambio de imagen estilo Bootstrap Carousel
+  useEffect(() => {
+    if (!currentImageRef.current || !nextImageRef.current) return
+
+    const currentItem = carouselItems[currentIndex]
+
+    // PRIMERO: cambiar la imagen en currentImageRef
+    currentImageRef.current.style.backgroundImage = `url(${currentItem.image})`
+    
+    // Resetear posición de la nueva imagen
+    gsap.set(currentImageRef.current, { opacity: 0, x: 100 })
+
+    // SEGUNDO: realizar la animación
+    const tl = gsap.timeline()
+
+    tl.to(currentImageRef.current, {
+      opacity: 1,
+      x: 0,
+      duration: 1.2,
+      ease: 'power1.inOut',
+    })
+
+    // Limpiar nextImageRef
+    gsap.set(nextImageRef.current, { opacity: 0, x: 100 })
+
+    // Animar texto
+    if (carouselTextRef.current) {
+      gsap.fromTo(
+        carouselTextRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.5, ease: 'power2.out', delay: 0.3 }
+      )
+    }
+  }, [currentIndex])
 
   const handlePrev = () => {
     setCurrentIndex((prev) => (prev - 1 + carouselItems.length) % carouselItems.length)
@@ -52,13 +92,23 @@ export const Body = () => {
     <div className="body-container">
       {/* CAROUSEL */}
       <div className="carousel">
-        <div
-          className="carousel-content"
-          style={{ backgroundImage: `url(${currentItem.image})` }}
-        >
+        <div ref={carouselContentRef} className="carousel-content">
+          {/* Imagen actual */}
+          <div
+            ref={currentImageRef}
+            style={{ backgroundImage: `url(${currentItem.image})` }}
+            className="carousel-image-layer"
+          />
+          
+          {/* Imagen siguiente */}
+          <div
+            ref={nextImageRef}
+            className="carousel-image-layer"
+          />
+
           <div className="carousel-overlay"></div>
 
-          <div className="carousel-text">
+          <div ref={carouselTextRef} className="carousel-text">
             <h2>{currentItem.title}</h2>
             <p>{currentItem.description}</p>
 
@@ -67,19 +117,19 @@ export const Body = () => {
             </Link>
           </div>
         </div>
-          <button 
-            className="carousel-button carousel-button-prev" 
-            onClick={handlePrev}
-          >
-            <Icon iconName="ChevronLeft" />
-          </button>
+        <button 
+          className="carousel-button carousel-button-prev" 
+          onClick={handlePrev}
+        >
+          <Icon iconName="ChevronLeft" />
+        </button>
 
-          <button 
-            className="carousel-button carousel-button-next" 
-            onClick={handleNext}
-          >
-            <Icon iconName="ChevronRight" />
-          </button>
+        <button 
+          className="carousel-button carousel-button-next" 
+          onClick={handleNext}
+        >
+          <Icon iconName="ChevronRight" />
+        </button>
       </div>
       <WeatherCarousel />
     </div>

@@ -9,9 +9,8 @@ import './css/WeatherCarousel.css'
 export const WeatherCarousel = () => {
   const { weather, recommendation, loading } = useWeatherRecommendations()
   const { addToCart } = useContext(CartContext)
-  const [currentIndex, setCurrentIndex] = useState(0)
   const carouselRef = useRef(null)
-  const itemsRef = useRef([])
+  const tlRef = useRef(null)
 
   const recommendedProducts = products.filter((p) =>
     recommendation.productIds.includes(p.id)
@@ -19,46 +18,35 @@ export const WeatherCarousel = () => {
 
   const totalProducts = recommendedProducts.length
 
+  // Rotación continua constante del cilindro
   useEffect(() => {
-    if (itemsRef.current.length === 0 || totalProducts === 0) return
+    if (!carouselRef.current || totalProducts === 0) return
 
-    // Limpiar refs viejos
-    itemsRef.current = itemsRef.current.slice(0, 3)
-
-    // Establecer estado inicial (desde los lados, transparente)
-    gsap.set(itemsRef.current, { opacity: 0, x: (index) => {
-      if (index === 0) return -60
-      if (index === 1) return 0
-      return 60
-    }})
-
-    // Animar deslizamiento horizontal suave
-    gsap.to(itemsRef.current, {
-      opacity: 1,
-      x: 0,
-      duration: 0.8,
-      ease: 'power3.out',
-      stagger: 0.12,
+    const tl = gsap.timeline({ repeat: -1 })
+    
+    tl.to(carouselRef.current, {
+      rotationY: 360,
+      duration: 24, // Una vuelta completa en 24 segundos
+      ease: 'none', // Velocidad constante
     })
-  }, [currentIndex, totalProducts])
 
-  // Auto-cambio cada 5 segundos
-  useEffect(() => {
-    if (totalProducts === 0) return
+    tlRef.current = tl
 
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % totalProducts)
-    }, 5000)
-
-    return () => clearInterval(interval)
+    return () => {
+      tl.kill()
+    }
   }, [totalProducts])
 
-  const handlePrev = () => {
-    setCurrentIndex((prev) => (prev - 1 + totalProducts) % totalProducts)
+  const handleMouseEnter = () => {
+    if (tlRef.current) {
+      tlRef.current.pause()
+    }
   }
 
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % totalProducts)
+  const handleMouseLeave = () => {
+    if (tlRef.current) {
+      tlRef.current.resume()
+    }
   }
 
   if (loading) {
@@ -69,12 +57,8 @@ export const WeatherCarousel = () => {
     return <div style={{ padding: '40px', textAlign: 'center' }}>No hay productos disponibles</div>
   }
 
-  const getPrevIndex = () => (currentIndex - 1 + totalProducts) % totalProducts
-  const getNextIndex = () => (currentIndex + 1) % totalProducts
-
-  const prevProduct = recommendedProducts[getPrevIndex()]
-  const currentProduct = recommendedProducts[currentIndex]
-  const nextProduct = recommendedProducts[getNextIndex()]
+  const anglePerProduct = 360 / totalProducts
+  const radius = totalProducts > 8 ? 600 : totalProducts > 6 ? 500 : totalProducts > 4 ? 400 : 350
 
   return (
     <div className="weather-carousel-container">
@@ -88,62 +72,53 @@ export const WeatherCarousel = () => {
         )}
       </div>
 
-      <div className="carousel-wrapper">
-        {/* PRODUCTO ANTERIOR (IZQUIERDA) */}
-        <div className="carousel-item carousel-side carousel-prev" ref={(el) => (itemsRef.current[0] = el)}>
-          <div className="side-product">
-            <img src={prevProduct.image} alt={prevProduct.name} />
-            <p className="side-label">Anterior</p>
-          </div>
-        </div>
-
-        {/* PRODUCTO PRINCIPAL (CENTRO) */}
+      <div className="carousel-3d-wrapper">
         <div
-          className="carousel-item carousel-center"
-          ref={(el) => (itemsRef.current[1] = el)}
+          ref={carouselRef}
+          className="carousel-3d"
+          style={{
+            '--radius': `${radius}px`,
+          }}
         >
-          <div className="center-product">
-            <Link to={`/product/${currentProduct.id}`} className="center-image-link">
-              <img src={currentProduct.image} alt={currentProduct.name} />
-            </Link>
+          {recommendedProducts.map((product, index) => {
+            const angle = (index * anglePerProduct)
+            return (
+              <div
+                key={product.id}
+                className="carousel-3d-item"
+                style={{
+                  '--item-angle': `${angle}deg`,
+                }}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+              >
+                <div className="card-flip">
+                  {/* FRENTE - Imagen */}
+                  <div className="card-front">
+                    <img src={product.image} alt={product.name} />
+                  </div>
 
-            <div className="center-content">
-              <Link to={`/product/${currentProduct.id}`} style={{ textDecoration: 'none' }}>
-                <h3 className="center-name">{currentProduct.name}</h3>
-                <p className="center-description">{currentProduct.description}</p>
-              </Link>
-
-              <div className="center-footer">
-                <span className="center-price">${Number(currentProduct.price).toFixed(0)}</span>
-                <button
-                  onClick={() => addToCart(currentProduct)}
-                  className="center-add-btn"
-                >
-                  Añadir al carrito
-                </button>
+                  {/* REVERSO - Descripción */}
+                  <div className="card-back">
+                    <div className="card-back-content">
+                      <h4>{product.name}</h4>
+                      <p>{product.description}</p>
+                      <div className="card-back-footer">
+                        <span className="card-price">${Number(product.price).toFixed(0)}</span>
+                        <button
+                          onClick={() => addToCart(product)}
+                          className="card-add-btn"
+                        >
+                          Añadir
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
+            )
+          })}
         </div>
-
-        {/* PRODUCTO SIGUIENTE (DERECHA) */}
-        <div className="carousel-item carousel-side carousel-next" ref={(el) => (itemsRef.current[2] = el)}>
-          <div className="side-product">
-            <img src={nextProduct.image} alt={nextProduct.name} />
-            <p className="side-label">Siguiente</p>
-          </div>
-        </div>
-      </div>
-
-      {/* INDICADOR DE POSICIÓN */}
-      <div className="carousel-indicator">
-        {recommendedProducts.map((_, idx) => (
-          <div
-            key={idx}
-            className={`indicator-dot ${idx === currentIndex ? 'active' : ''}`}
-            onClick={() => setCurrentIndex(idx)}
-          />
-        ))}
       </div>
     </div>
   )
