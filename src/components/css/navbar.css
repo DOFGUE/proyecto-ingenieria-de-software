@@ -1,0 +1,360 @@
+/* =========================
+   🔤 FUENTES
+========================= */
+@font-face {
+  font-family: 'Changa One';
+  src: url('./fonts/ChangaOne-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Bebas';
+  src: url('./fonts/Bebas-Regular.ttf') format('truetype');
+}
+
+/* =========================
+   🔍 SEARCH
+========================= */
+.search-container {
+  display: flex;
+  align-items: center;
+}
+
+.search-container.active {
+  background: rgba(10, 64, 12, 0.2);
+  backdrop-filter: blur(8px);
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.search-input {
+  width: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.search-container.active .search-input {
+  width: 220px;
+  opacity: 1;
+  margin-left: 8px;
+}
+
+/* 🔥 RESET FLUENT */
+.search-input .ms-TextField-fieldGroup {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.search-input .ms-TextField-fieldGroup::after,
+.search-input .ms-TextField-fieldGroup::before {
+  display: none !important;
+}
+
+.search-input .ms-TextField-field {
+  background: transparent !important;
+  color: #EFEAE0;
+  outline: none !important;
+}
+
+.search-input .ms-TextField-field::placeholder {
+  color: rgba(239, 234, 224, 0.5);
+}
+
+.search-input input {
+  border-radius: 20px;
+  padding: 6px 12px;
+}
+
+/* =========================
+   🧱 NAVBAR
+========================= */
+.navbar-shell {
+  width: 100%;
+  background: #0A400C;
+  color: #EFEAE0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: transform 0.3s ease;
+}
+
+.navbar-shell.visible {
+  transform: translateY(0);
+}
+
+.navbar-shell.hidden {
+  transform: translateY(-100%);
+}
+
+/* TOPBAR MEJORADO */
+.navbar-topbar {
+  background: rgba(11, 82, 14, 0.85);
+  color: #EFEAE0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 32px;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(6px);
+}
+.navbar-topbar-text {
+  opacity: 0.8;
+}
+
+.navbar-topbar-link {
+  text-decoration: none;
+  color: #EFEAE0;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.navbar-topbar-link:hover {
+  color: #B7AB86;
+}
+
+/* MAINBAR */
+.navbar-mainbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 32px;
+}
+
+/* LOGO */
+.navbar-brand {
+  font-family: 'Changa One';
+  color: #EFEAE0;
+  font-size: 60px;
+}
+
+/* ACTIONS */
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.navbar-action-icon {
+  font-size: 24px;
+  color: #EFEAE0;
+  cursor: pointer;
+}
+
+/* =========================
+   📂 SIDEBAR (MENÚ)
+========================= */
+
+/* Overlay */
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+  z-index: 998;
+  will-change: opacity;
+  opacity: 1;
+}
+
+/* Contenedor */
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: -280px;
+  width: 280px;
+  height: 100%;
+  background: linear-gradient(180deg, #0A400C 0%, #0d5c0f 100%);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 8px 0 32px rgba(0, 0, 0, 0.3);
+  will-change: left;
+}
+
+/* Header */
+.side-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 22px;
+  border-bottom: 1px solid rgba(239, 234, 224, 0.08);
+  background: #0A400C;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  flex-shrink: 0;
+}
+
+.side-menu-header span {
+  font-family: 'changa one';
+  font-size: 24px;
+  letter-spacing: 1px;
+  color: #EFEAE0;
+}
+
+/* Icono cerrar */
+.side-menu-header .ms-Icon {
+  cursor: pointer;
+  font-size: 18px;
+  color: #EFEAE0;
+  transition: all 0.2s ease;
+}
+
+.side-menu-header .ms-Icon:hover {
+  color: #B7AB86 !important;
+  transform: rotate(90deg);
+}
+
+/* Contenedor scrollable de Fluent UI */
+.side-menu-scrollable {
+  flex: 1;
+  overflow: hidden;
+}
+
+.side-menu-scrollable > div {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Contenido */
+.side-menu-content {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 0;
+  flex: 1;
+}
+
+/* Links */
+.side-menu-link {
+  padding: 15px 24px;
+  text-decoration: none;
+  color: #EFEAE0;
+  font-size: 16px;
+  font-weight: 500;
+  border-left: 4px solid transparent;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  will-change: background, color, border-left, padding-left;
+}
+
+/* Hover */
+.side-menu-link:hover {
+  background: rgba(183, 171, 134, 0.1);
+  color: #B7AB86;
+  border-left: 4px solid #B7AB86;
+  padding-left: 30px;
+}
+
+/* ========== SUBCATEGORÍAS ========== */
+
+/* Contenedor de categoría con subcategorías */
+.side-menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 24px;
+  color: #EFEAE0;
+  font-size: 16px;
+  font-weight: 500;
+  border-left: 4px solid transparent;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.side-menu-item:hover {
+  background: rgba(183, 171, 134, 0.1);
+  border-left: 4px solid #B7AB86;
+  padding-left: 30px;
+}
+
+/* Icono de chevron */
+.side-menu-item .ms-Icon {
+  color: #B7AB86;
+  font-size: 14px;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Menú de subcategorías */
+.side-menu-submenu {
+  background: rgba(183, 171, 134, 0.08);
+  border-left: 4px solid #B7AB86;
+  display: flex;
+  flex-direction: column;
+  animation: slideDown 0.15s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  will-change: opacity, max-height, transform;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    max-height: 500px;
+    transform: translateY(0);
+  }
+}
+
+/* Enlaces de subcategorías */
+.side-menu-sublink {
+  padding: 12px 24px 12px 48px;
+  text-decoration: none;
+  color: rgba(239, 234, 224, 0.85);
+  font-size: 14px;
+  font-weight: 400;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border-left: 3px solid transparent;
+}
+
+.side-menu-sublink:hover {
+  background: rgba(183, 171, 134, 0.1);
+  color: #B7AB86;
+  border-left: 3px solid #B7AB86;
+  padding-left: 54px;
+}
+
+/* Animación overlay */
+@keyframes fadeOverlay {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* =========================
+   📱 RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+  .navbar-topbar {
+    padding: 8px 16px;
+  }
+
+  .navbar-mainbar {
+    padding: 12px 16px;
+  }
+
+  .navbar-brand {
+    font-size: 28px;
+  }
+
+  .navbar-actions {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-topbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar-actions {
+    margin-left: auto;
+  }
+}

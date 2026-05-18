@@ -1,0 +1,159 @@
+.config-container {
+  min-height: calc(100vh - 180px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #EFEAE0 0%, #B7AB86 100%);
+}
+
+.config-card {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(10,64,12,0.15);
+  padding: 48px;
+  width: 100%;
+  max-width: 520px;
+  animation: fadeIn 0.4s ease-out;
+  border: 1px solid rgba(10,64,12,0.1);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.config-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.config-logo {
+  display: inline-block;
+  font-size: 28px;
+  font-weight: 800;
+  color: #0A400C;
+  text-decoration: none;
+  margin-bottom: 24px;
+  letter-spacing: 2px;
+}
+
+.config-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #0A400C;
+  margin: 0 0 8px 0;
+}
+
+.config-subtitle {
+  font-size: 14px;
+  color: #0A400C;
+  opacity: 0.7;
+  margin: 0;
+}
+
+.config-section {
+  margin-bottom: 28px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid rgba(10,64,12,0.1);
+}
+
+.config-section:last-of-type {
+  border-bottom: none;
+  margin-bottom: 20px;
+}
+
+.config-section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #0A400C;
+  margin: 0 0 20px 0;
+}
+
+.config-section-title .ms-Icon {
+  font-size: 20px;
+  color: #0B520E;
+}
+
+.config-field {
+  margin-bottom: 4px;
+}
+
+.config-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #0A400C;
+  margin-bottom: 8px;
+}
+
+.config-save-button {
+  background: #0A400C !important;
+  border-radius: 8px !important;
+  color: #EFEAE0 !important;
+  margin-top: 8px;
+}
+
+.config-save-button:hover {
+  background: #0B520E !important;
+}
+
+.config-option-button {
+  border-radius: 8px !important;
+  justify-content: flex-start !important;
+}
+
+.config-option-button:hover {
+  background: rgba(239,234,224,0.6) !important;
+}
+
+.config-logout-section {
+  padding-bottom: 0;
+}
+
+.config-logout-button {
+  border-radius: 8px !important;
+  background: #0A400C !important;
+  color: #EFEAE0 !important;
+}
+
+.config-logout-button:hover {
+  background: #0B520E !important;
+}
+
+.config-back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #0A400C;
+  text-decoration: none;
+  font-size: 14px;
+  margin-top: 24px;
+  opacity: 0.7;
+}
+
+.config-back:hover {
+  color: #0B520E;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .config-card {
+    padding: 32px 24px;
+  }
+
+  .config-title {
+    font-size: 20px;
+  }
+}

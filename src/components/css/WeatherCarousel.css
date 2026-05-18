@@ -1,0 +1,314 @@
+.weather-carousel-container {
+  width: 100%;
+  padding: 40px 20px;
+  background: #e3dac0;
+  color: #EFEAE0;
+  border-radius: 12px;
+  margin: 40px 0;
+  perspective: 1200px;
+}
+
+.carousel-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.carousel-header h2 {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+  color: #482b0d;
+}
+
+.carousel-header p {
+  font-size: 16px;
+  margin: 5px 0;
+  opacity: 0.9;
+  color: #56340f;
+}
+
+.weather-temp-info {
+  font-size: 18px;
+  margin-top: 15px !important;
+  font-weight: 600;
+  color: #56340f;
+}
+
+/* CARRUSEL 3D CILÍNDRICO */
+.carousel-3d-wrapper {
+  position: relative;
+  width: 100%;
+  height: 380px;
+  perspective: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.carousel-3d {
+  position: relative;
+  width: 200px;
+  height: 300px;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.carousel-3d-item {
+  position: absolute;
+  width: 220px;
+  height: 240px;
+  left: 50%;
+  top: 50%;
+  margin-left: -110px;
+  margin-top: -120px;
+  transform: rotateY(var(--item-angle)) translateZ(var(--radius));
+  transform-style: preserve-3d;
+}
+
+/* TARJETA CON FLIP 3D */
+.card-flip {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease;
+  cursor: pointer;
+}
+
+.carousel-3d-item:hover .card-flip {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.card-front {
+  background: linear-gradient(135deg, rgba(183, 171, 134, 0.15) 0%, rgba(183, 171, 134, 0.05) 100%);
+  border: 2px solid rgba(183, 171, 134, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 20px;
+}
+
+.card-back {
+  background: linear-gradient(135deg, #0d5c0f 0%, #0a400c 100%);
+  border: 2px solid rgba(183, 171, 134, 0.5);
+  transform: rotateY(180deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.card-back-content {
+  padding: 20px;
+  text-align: center;
+  color: #EFEAE0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.card-back-content h4 {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+  color: #EFEAE0;
+  line-height: 1.3;
+}
+
+.card-back-content p {
+  font-size: 12px;
+  margin: 0;
+  color: rgba(239, 234, 224, 0.85);
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.card-back-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.card-price {
+  font-size: 18px;
+  font-weight: 800;
+  color: #52b788;
+}
+
+.card-add-btn {
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #52b788 0%, #40915a 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(82, 183, 136, 0.3);
+}
+
+.card-add-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(82, 183, 136, 0.4);
+}
+
+.card-add-btn:active {
+  transform: translateY(0);
+}
+
+/* CONTROLES */
+.carousel-3d-controls {
+  display: none;
+}
+
+.control-btn {
+  display: none;
+}
+
+
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .carousel-3d-wrapper {
+    height: 350px;
+  }
+
+  .carousel-3d {
+    width: 200px;
+    height: 240px;
+  }
+
+  .carousel-3d-item {
+    width: 200px;
+    height: 220px;
+    margin-left: -100px;
+    margin-top: -110px;
+  }
+
+  .card-back-content {
+    padding: 14px;
+  }
+
+  .card-back-content h4 {
+    font-size: 13px;
+  }
+
+  .card-back-content p {
+    font-size: 10px;
+  }
+
+  .card-price {
+    font-size: 15px;
+  }
+
+  .card-add-btn {
+    padding: 5px 10px;
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel-3d-wrapper {
+    height: 320px;
+  }
+
+  .carousel-3d {
+    width: 180px;
+    height: 220px;
+  }
+
+  .carousel-3d-item {
+    width: 180px;
+    height: 200px;
+    margin-left: -90px;
+    margin-top: -100px;
+  }
+
+  .carousel-header h2 {
+    font-size: 24px;
+  }
+
+  .card-front img {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .weather-carousel-container {
+    padding: 20px 12px;
+    margin: 20px 0;
+  }
+
+  .carousel-3d-wrapper {
+    height: 280px;
+  }
+
+  .carousel-3d {
+    width: 160px;
+    height: 180px;
+  }
+
+  .carousel-3d-item {
+    width: 160px;
+    height: 160px;
+    margin-left: -80px;
+    margin-top: -80px;
+  }
+
+  .carousel-header h2 {
+    font-size: 20px;
+  }
+
+  .carousel-header p {
+    font-size: 12px;
+  }
+
+  .card-back-content {
+    padding: 10px;
+  }
+
+  .card-back-content h4 {
+    font-size: 11px;
+  }
+
+  .card-back-content p {
+    font-size: 9px;
+  }
+
+  .card-price {
+    font-size: 12px;
+  }
+
+  .card-add-btn {
+    padding: 4px 8px;
+    font-size: 8px;
+  }
+
+  .card-front img {
+    padding: 10px;
+  }
+}
+
