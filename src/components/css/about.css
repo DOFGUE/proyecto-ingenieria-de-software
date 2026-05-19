@@ -1,3 +1,6 @@
+/* =========================
+   FUENTE
+========================= */
 @font-face {
   font-family: 'Changa One';
   src: url('./fonts/ChangaOne-Regular.ttf') format('truetype');
@@ -5,67 +8,264 @@
   font-style: normal;
 }
 
+/* =========================
+   CONTENEDOR PRINCIPAL
+========================= */
 .about-container {
   max-width: 1200px;
-  margin: 20px auto;
-  padding: 40px 40px;
-  background: #e1dfc0;
-  color: #000000;
+  margin: 40px auto;
+  padding: 0 32px;
+  color: #0A400C;
 }
 
+/* =========================
+   HERO / HEADER
+========================= */
 .about-header {
-  text-align: center;
+  position: relative;
+  overflow: hidden;
+
+  padding: 70px 50px;
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(10, 64, 12, 0.92) 0%,
+      rgba(13, 92, 15, 0.88) 100%
+    );
+
+  box-shadow:
+    0 14px 40px rgba(0, 0, 0, 0.18);
+
   margin-bottom: 40px;
+}
+
+.about-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(239, 234, 224, 0.12),
+      transparent 40%
+    );
+
+  pointer-events: none;
 }
 
 .about-header h1 {
-  font-family: 'Changa One';
-  font-size: 36px;
-  font-weight: 800;
-  margin-bottom: 10px;
-  color: #b8513f;
+  position: relative;
+  z-index: 2;
+
+  font-family: 'Changa One', sans-serif;
+  font-size: 54px;
+  font-weight: lighter;
+  letter-spacing: 2px;
+
+  margin-bottom: 16px;
+
+  color: #EFEAE0;
+
+  text-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
 .about-header p {
+  position: relative;
+  z-index: 2;
+
+  max-width: 700px;
+
   font-size: 18px;
-  color: #000000;
+  line-height: 1.7;
+
+  color: rgba(239, 234, 224, 0.92);
 }
 
+/* =========================
+   SECCIONES
+========================= */
 .about-section {
-  margin-bottom: 40px;
+  background: linear-gradient(
+    135deg,
+    rgba(239, 234, 224, 0.92) 0%,
+    rgba(225, 223, 192, 0.95) 100%
+  );
+
+  border: 1px solid rgba(10, 64, 12, 0.12);
+
+  border-radius: 20px;
+
+  padding: 32px;
+
+  margin-bottom: 28px;
+
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.08);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
 }
 
+.about-section:hover {
+  transform: translateY(-4px);
+
+  border-color: rgba(10, 64, 12, 0.25);
+
+  box-shadow:
+    0 18px 34px rgba(0, 0, 0, 0.12);
+}
+
+/* =========================
+   TÍTULOS
+========================= */
 .about-section h2 {
-  font-size: 24px;
-  font-weight: 600;
-  margin-bottom: 15px;
-  color: #111111;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  font-family: 'Changa One', sans-serif;
+  font-weight: lighter;
+  letter-spacing: 1px;
+
+  font-size: 30px;
+
+  margin-bottom: 18px;
+
+  color: #0A400C;
 }
 
+/* línea decorativa */
+.about-section h2::after {
+  content: '';
+
+  width: 50px;
+  height: 3px;
+
+  border-radius: 999px;
+
+  background: #B7AB86;
+}
+
+/* =========================
+   TEXTOS
+========================= */
 .about-section p {
   font-size: 16px;
-  line-height: 1.6;
-  color: #333333;
+  line-height: 1.8;
+
+  color: rgba(10, 64, 12, 0.82);
+
+  margin: 0;
 }
 
+/* =========================
+   LISTA
+========================= */
 .about-section ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .about-section ul li {
-  font-size: 16px;
-  line-height: 1.6;
-  color: #333333;
-  margin-bottom: 8px;
-  padding-left: 20px;
   position: relative;
+
+  padding-left: 28px;
+  margin-bottom: 14px;
+
+  font-size: 16px;
+  line-height: 1.7;
+
+  color: rgba(10, 64, 12, 0.82);
 }
 
-.about-section ul li:before {
-  content: '•';
-  color: #000000;
-  font-weight: bold;
+.about-section ul li::before {
+  content: '✓';
+
   position: absolute;
   left: 0;
+  top: 0;
+
+  color: #0d5c0f;
+
+  font-weight: bold;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 1024px) {
+  .about-header {
+    padding: 60px 40px;
+  }
+
+  .about-header h1 {
+    font-size: 44px;
+  }
+
+  .about-section h2 {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-container {
+    padding: 0 18px;
+  }
+
+  .about-header {
+    padding: 50px 28px;
+    border-radius: 18px;
+  }
+
+  .about-header h1 {
+    font-size: 36px;
+  }
+
+  .about-header p {
+    font-size: 16px;
+  }
+
+  .about-section {
+    padding: 24px;
+    border-radius: 16px;
+  }
+
+  .about-section h2 {
+    font-size: 24px;
+  }
+
+  .about-section p,
+  .about-section ul li {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-container {
+    margin: 24px auto;
+    padding: 0 12px;
+  }
+
+  .about-header {
+    padding: 42px 22px;
+  }
+
+  .about-header h1 {
+    font-size: 30px;
+  }
+
+  .about-section {
+    padding: 20px;
+  }
+
+  .about-section h2 {
+    font-size: 22px;
+  }
 }
