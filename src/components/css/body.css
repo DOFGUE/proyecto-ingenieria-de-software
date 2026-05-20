@@ -57,14 +57,13 @@
   overflow: hidden;
 }
 
-/* Capas de imagen superpuestas para transición Bootstrap-style */
-.carousel-image-layer {
+/* Capas de imagen - simple sin animaciones */
+.carousel-image {
   position: absolute;
   inset: 0;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  will-change: transform, opacity;
 }
 
 /* overlay verde elegante */
