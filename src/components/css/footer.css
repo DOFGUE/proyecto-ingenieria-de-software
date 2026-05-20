@@ -2,16 +2,16 @@
     background: #0A400C;
     backdrop-filter: blur(8px);
     color: #EFEAE0;
-    padding: 50px 24px;
+    padding: 50px 20px;
     margin-top: auto;
 }
 
 /* CONTENIDO */
 .footer-content {
-    max-width: 1200px;
+    max-width: 100%;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 30px;
 }
 

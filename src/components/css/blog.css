@@ -1,63 +1,89 @@
 .blog-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 20px;
-  background: #ffffff;
-  color: #111111;
+  padding: 60px 20px;
+  background: #f8f6f0;
+  color: #2d2d2d;
+  min-height: 80vh;
 }
 
 .blog-header {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
+  background: linear-gradient(135deg, #0A400C 0%, #0d5c0f 100%);
+  padding: 40px 30px;
+  border-radius: 16px;
+  color: #EFEAE0;
 }
 
 .blog-header h1 {
-  font-size: 36px;
-  font-weight: 800;
-  margin-bottom: 10px;
+  font-family: 'Changa One', cursive;
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  letter-spacing: 1.5px;
+  color: #EFEAE0;
 }
 
 .blog-header p {
-  font-size: 18px;
-  color: #666666;
+  font-size: 16px;
+  color: rgba(239, 234, 224, 0.9);
+  line-height: 1.6;
 }
 
 .blog-posts {
   display: grid;
-  gap: 24px;
+  gap: 28px;
 }
 
 .blog-post {
-  border: 1px solid #e6e6e6;
-  border-radius: 16px;
-  padding: 28px;
-  background: #f9f9f9;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  border: 2px solid rgba(183, 171, 134, 0.3);
+  border-radius: 12px;
+  padding: 32px;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(10, 64, 12, 0.08);
+  transition: all 0.3s ease;
+}
+
+.blog-post:hover {
+  box-shadow: 0 12px 32px rgba(10, 64, 12, 0.15);
+  border-color: #52b788;
+  transform: translateY(-2px);
 }
 
 .blog-post h2 {
-  font-size: 24px;
-  margin-bottom: 12px;
-  color: #111111;
+  font-family: 'Changa One', cursive;
+  font-size: 26px;
+  margin-bottom: 16px;
+  color: #0A400C;
+  letter-spacing: 0.5px;
+  line-height: 1.4;
 }
 
 .blog-post p {
   font-size: 16px;
-  line-height: 1.7;
+  line-height: 1.8;
   color: #444444;
+  margin-bottom: 12px;
 }
 
 .blog-post .blog-meta {
-  margin-top: 18px;
-  font-size: 14px;
-  color: #777777;
+  margin-top: 20px;
+  font-size: 13px;
+  color: #B7AB86;
+  font-weight: 500;
+  letter-spacing: 0.3px;
 }
 
 .blog-post a {
-  color: #000000;
-  text-decoration: underline;
+  color: #0A400C;
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 2px solid #52b788;
+  transition: all 0.2s ease;
 }
 
 .blog-post a:hover {
-  color: #333333;
+  color: #52b788;
+  border-bottom-color: #0A400C;
 }
